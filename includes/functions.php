@@ -125,24 +125,56 @@ function generatePagination($total_items, $items_per_page, $current_page, $url) 
 
 // Send email
 function sendEmail($to, $subject, $body, $is_html = true) {
-    // For development, just log the email
-    if (DEBUG_MODE) {
-        $log_message = "Email to: $to | Subject: $subject | Body: $body" . PHP_EOL;
-        file_put_contents(LOG_PATH . 'emails.log', $log_message, FILE_APPEND);
+    // Include PHPMailer
+    require_once APP_ROOT . '/vendor/autoload.php';
+    
+    try {
+        $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+        
+        // Server settings
+        $mail->isSMTP();
+        $mail->Host = SMTP_HOST;
+        $mail->SMTPAuth = true;
+        $mail->Username = SMTP_USERNAME;
+        $mail->Password = SMTP_PASSWORD;
+        $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = SMTP_PORT;
+        
+        // Recipients
+        $mail->setFrom(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
+        $mail->addAddress($to);
+        $mail->addReplyTo(SMTP_FROM_EMAIL, SMTP_FROM_NAME);
+        
+        // Content
+        $mail->isHTML($is_html);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+        if ($is_html) {
+            $mail->AltBody = strip_tags($body);
+        }
+        
+        // Send email
+        $mail->send();
+        
+        // Log success in debug mode
+        if (DEBUG_MODE) {
+            $log_message = date('Y-m-d H:i:s') . " | SUCCESS | Email to: $to | Subject: $subject" . PHP_EOL;
+            @file_put_contents(LOG_PATH . 'emails.log', $log_message, FILE_APPEND);
+        }
+        
         return true;
+        
+    } catch (PHPMailer\PHPMailer\Exception $e) {
+        // Log error
+        $error_message = date('Y-m-d H:i:s') . " | ERROR | Email to: $to | Subject: $subject | Error: " . $e->getMessage() . PHP_EOL;
+        @file_put_contents(LOG_PATH . 'emails.log', $error_message, FILE_APPEND);
+        
+        if (DEBUG_MODE) {
+            error_log("Email sending failed: " . $e->getMessage());
+        }
+        
+        return false;
     }
-    
-    // In production, use proper email library like PHPMailer
-    // This is a placeholder for email functionality
-    $headers = "From: " . SMTP_FROM_EMAIL . "\r\n";
-    $headers .= "Reply-To: " . SMTP_FROM_EMAIL . "\r\n";
-    
-    if ($is_html) {
-        $headers .= "MIME-Version: 1.0\r\n";
-        $headers .= "Content-Type: text/html; charset=UTF-8\r\n";
-    }
-    
-    return mail($to, $subject, $body, $headers);
 }
 
 // Generate random string

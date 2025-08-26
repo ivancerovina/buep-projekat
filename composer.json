@@ -3,7 +3,8 @@
     "description": "Fuel tracking application for security in electronic business project",
     "type": "project",
     "require": {
-        "php": ">=7.4"
+        "php": ">=7.4",
+        "phpmailer/phpmailer": "^6.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.24"

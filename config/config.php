@@ -34,7 +34,7 @@ define('SMTP_HOST', 'smtp.gmail.com');
 define('SMTP_PORT', 587);
 define('SMTP_USERNAME', 'srdjan.novic.20@gmail.com');
 define('SMTP_PASSWORD', 'cgjs kqwr sbuj qyox');
-define('SMTP_FROM_EMAIL', 'noreply@fueltracker.com');
+define('SMTP_FROM_EMAIL', 'srdjan.novic.20@gmail.com');
 define('SMTP_FROM_NAME', 'Fuel Tracker System');
 
 // Logging settings
