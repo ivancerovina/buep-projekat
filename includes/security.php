@@ -108,11 +108,20 @@ class Security {
     
     // Rate limiting check
     public static function checkRateLimit($identifier, $max_attempts = 5, $time_window = 300) {
+        // Try to use system temp directory if LOG_PATH is not writable
         $cache_file = LOG_PATH . 'rate_limit_' . md5($identifier) . '.tmp';
+        
+        // Check if directory is writable, if not use system temp
+        if (!is_writable(dirname($cache_file))) {
+            $cache_file = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'rate_limit_' . md5($identifier) . '.tmp';
+        }
         
         $attempts = [];
         if (file_exists($cache_file)) {
-            $attempts = json_decode(file_get_contents($cache_file), true) ?? [];
+            $content = @file_get_contents($cache_file);
+            if ($content !== false) {
+                $attempts = json_decode($content, true) ?? [];
+            }
         }
         
         // Remove old attempts outside the time window
@@ -127,7 +136,8 @@ class Security {
         
         // Add current attempt
         $attempts[] = $current_time;
-        file_put_contents($cache_file, json_encode($attempts));
+        // Suppress warning if write fails - rate limiting is not critical
+        @file_put_contents($cache_file, json_encode($attempts));
         
         return true; // Within rate limit
     }

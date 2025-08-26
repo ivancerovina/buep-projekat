@@ -9,6 +9,15 @@ if (!defined('APP_RUNNING')) {
 
 // Redirect to URL
 function redirect($url) {
+    // Check if headers have already been sent
+    if (headers_sent($file, $line)) {
+        // If headers were sent, use JavaScript redirect as fallback
+        echo "<script>window.location.href='$url';</script>";
+        echo "<noscript><meta http-equiv='refresh' content='0;url=$url'></noscript>";
+        exit();
+    }
+    
+    // Send redirect header
     header("Location: $url");
     exit();
 }

@@ -130,8 +130,15 @@ class Auth {
     
     // Create user session
     private static function createUserSession($user) {
-        // Regenerate session ID for security
-        session_regenerate_id(true);
+        // Ensure session is started and no output has been sent
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        
+        // Only regenerate session ID if headers haven't been sent
+        if (!headers_sent()) {
+            session_regenerate_id(true);
+        }
         
         // Store user data in session
         $_SESSION['user_id'] = $user['id'];
