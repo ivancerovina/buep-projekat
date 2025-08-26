@@ -384,7 +384,7 @@ VAŽNO: Promeniti default lozinku nakon prvog logovanja!
 
 7.1 Prijava u Sistem
 --------------------
-1. Otvoriti http://localhost/buep-projekat/public/login.php
+1. Otvoriti http://localhost/login.php
 2. Uneti korisničko ime i lozinku
 3. Kliknuti "Prijavi se"
 

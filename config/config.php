@@ -15,7 +15,7 @@ define('APP_ROOT', dirname(__DIR__));
 // Security settings
 define('SESSION_LIFETIME', 1800); // 30 minutes
 define('MAX_LOGIN_ATTEMPTS', 5);
-define('LOCKOUT_TIME', 60); // 1 minute in seconds (for testing)
+define('LOCKOUT_TIME', 900); // 1 minute in seconds (for testing)
 define('PASSWORD_RESET_TOKEN_VALIDITY', 3600); // 1 hour
 define('CSRF_TOKEN_NAME', 'csrf_token');
 define('SECURE_COOKIE', false); // Set to true when using HTTPS

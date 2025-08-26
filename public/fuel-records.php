@@ -36,7 +36,7 @@ if (isset($_GET['delete']) && isset($_GET['token'])) {
     } else {
         setAlert('Invalid security token.', 'error');
     }
-    redirect('/buep-projekat/public/fuel-records.php');
+    redirect('/fuel-records.php');
 }
 
 // Pagination

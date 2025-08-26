@@ -10,7 +10,7 @@ Auth::startSecureSession();
 
 // Redirect if already logged in
 if (Auth::isLoggedIn()) {
-    redirect('/buep-projekat/public/dashboard.php');
+    redirect('/dashboard.php');
 }
 
 $errors = [];

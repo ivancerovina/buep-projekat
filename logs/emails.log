@@ -3,9 +3,9 @@ Email to: srdjan.novic.20@gmail.com | Subject: Password Reset Request | Body:
                         <p>Hello System,</p>
                         <p>We received a request to reset your password for your Fuel Tracker account.</p>
                         <p>To reset your password, please click the link below:</p>
-                        <p><a href='http://localhost/buep-projekat/public/reset-password.php?token=51a69315c4aeaf6bf7d33f00bd3e03d5b88f091c2daf7f9e1402cb7c55cbfb96'>Reset Password</a></p>
+                        <p><a href='http://localhost/reset-password.php?token=51a69315c4aeaf6bf7d33f00bd3e03d5b88f091c2daf7f9e1402cb7c55cbfb96'>Reset Password</a></p>
                         <p>Or copy and paste this URL into your browser:</p>
-                        <p>http://localhost/buep-projekat/public/reset-password.php?token=51a69315c4aeaf6bf7d33f00bd3e03d5b88f091c2daf7f9e1402cb7c55cbfb96</p>
+                        <p>http://localhost/reset-password.php?token=51a69315c4aeaf6bf7d33f00bd3e03d5b88f091c2daf7f9e1402cb7c55cbfb96</p>
                         <p>This link will expire in 1 hour.</p>
                         <p>If you didn't request this password reset, please ignore this email.</p>
                         <p>Best regards,<br>Fuel Tracker Team</p>

@@ -56,7 +56,7 @@ Secure web application for tracking fuel consumption costs within a company, dev
    - **Important**: Delete setup.php after running it!
 
 5. **Access the application:**
-   - URL: http://localhost/buep-projekat/public/
+   - URL: http://localhost/
    - You will be redirected to the login page
 
 ## Default Login Credentials

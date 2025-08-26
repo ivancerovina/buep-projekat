@@ -68,6 +68,96 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 error_log("Error resetting failed logins: " . $e->getMessage());
                 $error_message = "An error occurred while resetting failed logins.";
             }
+            
+        } elseif ($action === 'generate_test_data') {
+            // Generate test data (users and fuel records)
+            try {
+                $created_users = 0;
+                $created_records = 0;
+                
+                // Generate 10 test users (2 managers, 8 employees)
+                $first_names = ['John', 'Jane', 'Michael', 'Sarah', 'David', 'Emily', 'Robert', 'Lisa', 'James', 'Mary'];
+                $last_names = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Wilson', 'Martinez'];
+                $companies = ['TechCorp', 'DataSoft', 'CloudNet', 'WebPro', 'AppDev'];
+                
+                $test_users = [];
+                for ($i = 0; $i < 10; $i++) {
+                    $first_name = $first_names[$i];
+                    $last_name = $last_names[array_rand($last_names)];
+                    $username = strtolower($first_name . '.' . $last_name . rand(100, 999));
+                    $email = $username . '@example.com';
+                    $role = ($i < 2) ? 'manager' : 'employee';
+                    $password = password_hash('Test123!', PASSWORD_DEFAULT);
+                    
+                    // Check if username already exists
+                    $check_sql = "SELECT id FROM users WHERE username = :username OR email = :email";
+                    $existing = $db->fetchOne($check_sql, [':username' => $username, ':email' => $email]);
+                    
+                    if (!$existing) {
+                        $sql = "INSERT INTO users (username, email, password_hash, first_name, last_name, role, is_active, created_at) 
+                                VALUES (:username, :email, :password_hash, :first_name, :last_name, :role, 1, NOW())";
+                        $params = [
+                            ':username' => $username,
+                            ':email' => $email,
+                            ':password_hash' => $password,
+                            ':first_name' => $first_name,
+                            ':last_name' => $last_name,
+                            ':role' => $role
+                        ];
+                        $db->execute($sql, $params);
+                        $test_users[] = $db->getConnection()->lastInsertId();
+                        $created_users++;
+                    }
+                }
+                
+                // Get all non-admin users for fuel records
+                $sql = "SELECT id FROM users WHERE role != 'admin'";
+                $all_users = $db->fetchAll($sql);
+                
+                if (count($all_users) > 0) {
+                    // Generate 100 random fuel records
+                    $locations = ['Shell Station', 'BP Gas', 'Chevron', 'Exxon', 'Mobil', 'Texaco', 'Gulf Oil', 'Circle K', 'Marathon', '76 Station'];
+                    
+                    for ($i = 0; $i < 100; $i++) {
+                        $user = $all_users[array_rand($all_users)];
+                        $user_id = $user['id'];
+                        
+                        // Random date within last 6 months
+                        $days_ago = rand(0, 180);
+                        $date = date('Y-m-d', strtotime("-$days_ago days"));
+                        
+                        // Random fuel data
+                        $mileage = rand(10000, 150000);
+                        $liters = round(rand(20, 80) + rand(0, 99) / 100, 2);
+                        $price_per_liter = round(rand(150, 250) / 100, 2);
+                        $total_cost = round($liters * $price_per_liter, 2);
+                        $location = $locations[array_rand($locations)];
+                        $notes = rand(0, 3) == 0 ? 'Business trip' : (rand(0, 2) == 0 ? 'Regular refuel' : '');
+                        
+                        $sql = "INSERT INTO fuel_records (user_id, date, mileage, liters, price_per_liter, total_cost, location, notes, created_at) 
+                                VALUES (:user_id, :date, :mileage, :liters, :price_per_liter, :total_cost, :location, :notes, NOW())";
+                        $params = [
+                            ':user_id' => $user_id,
+                            ':date' => $date,
+                            ':mileage' => $mileage,
+                            ':liters' => $liters,
+                            ':price_per_liter' => $price_per_liter,
+                            ':total_cost' => $total_cost,
+                            ':location' => $location,
+                            ':notes' => $notes
+                        ];
+                        $db->execute($sql, $params);
+                        $created_records++;
+                    }
+                }
+                
+                Security::logSecurityEvent('TEST_DATA_GENERATED', "Admin generated test data: $created_users users, $created_records fuel records", $user['id']);
+                $success_message = "Test data generated successfully: $created_users users and $created_records fuel records created.";
+                
+            } catch (Exception $e) {
+                error_log("Error generating test data: " . $e->getMessage());
+                $error_message = "An error occurred while generating test data: " . $e->getMessage();
+            }
         }
     }
 }
@@ -479,6 +569,16 @@ $csrf_token = Security::generateCSRFToken();
                             <input type="hidden" name="action" value="reset_failed_logins">
                             <?php echo Security::getCSRFTokenField(); ?>
                             <button type="submit" class="btn btn-danger" onclick="return confirm('This will unlock all locked accounts. Continue?');">Reset Failed Logins</button>
+                        </form>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <h4>Generate Test Data</h4>
+                        <p>Create test users and fuel records for system testing. This will generate 10 users (2 managers, 8 employees) and 100 random fuel records.</p>
+                        <form method="POST" action="" class="setting-form">
+                            <input type="hidden" name="action" value="generate_test_data">
+                            <?php echo Security::getCSRFTokenField(); ?>
+                            <button type="submit" class="btn btn-primary" style="background: #9C27B0;" onclick="return confirm('This will create 10 test users and 100 fuel records. Continue?');">Generate Test Data</button>
                         </form>
                     </div>
                 </div>
