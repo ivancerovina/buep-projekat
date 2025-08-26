@@ -1,0 +1,16 @@
+{
+    "name": "buep-projekat/fuel-tracking",
+    "description": "Fuel tracking application for security in electronic business project",
+    "type": "project",
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.24"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "includes/"
+        }
+    }
+}

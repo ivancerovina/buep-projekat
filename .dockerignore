@@ -1,0 +1,61 @@
+# Version control
+.git
+.gitignore
+
+# IDE files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/*
+!logs/.gitkeep
+
+# Node modules (if any)
+node_modules
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
+
+# Docker files (not needed inside container)
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# Documentation
+README.md
+*.md
+
+# Backup files
+*.bak
+*.backup
+
+# Cache files
+cache/
+tmp/
+
+# Environment files (create them inside container if needed)
+.env
+.env.*
+
+# Database files
+*.sql
+*.db
+*.sqlite
+
+# Vendor dependencies (if using Composer)
+vendor/

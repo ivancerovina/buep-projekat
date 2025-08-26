@@ -1,0 +1,11 @@
+2025-08-19 07:34:57 | LOGIN_FAILED | User: 1 | Invalid password for user: admin | IP: 127.0.0.1
+2025-08-19 07:35:20 | LOGIN_FAILED | User: 1 | Invalid password for user: admin | IP: 127.0.0.1
+2025-08-19 07:35:37 | LOGIN_FAILED | User: 1 | Invalid password for user: admin | IP: 127.0.0.1
+2025-08-19 07:36:21 | LOGIN_FAILED | User: 1 | Invalid password for user: admin | IP: 127.0.0.1
+2025-08-19 07:36:27 | ACCOUNT_LOCKED | User: 1 | Account locked after 5 failed attempts | IP: 127.0.0.1
+2025-08-19 07:36:27 | LOGIN_FAILED | User: 1 | Invalid password for user: admin | IP: 127.0.0.1
+2025-08-19 07:36:57 | LOGIN_LOCKED | User: 1 | Attempted login to locked account | IP: 127.0.0.1
+2025-08-19 07:38:37 | LOGIN_SUCCESS | User: 1 | User logged in successfully | IP: 127.0.0.1
+2025-08-19 07:38:59 | DATA_EXPORT | User: 1 | Admin exported monthly report | IP: 127.0.0.1
+2025-08-19 07:39:39 | LOGOUT | User: 1 | User logged out | IP: 127.0.0.1
+2025-08-19 07:39:51 | LOGIN_SUCCESS | User: 3 | User logged in successfully | IP: 127.0.0.1

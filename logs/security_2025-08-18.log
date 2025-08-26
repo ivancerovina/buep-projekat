@@ -1,0 +1,29 @@
+2025-08-18 19:38:50 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:38:59 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:39:31 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:40:21 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:41:10 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:41:50 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:43:19 | LOGIN_RATE_LIMIT | Rate limit exceeded for IP: 127.0.0.1 | IP: 127.0.0.1
+2025-08-18 19:52:10 | PASSWORD_RESET_INVALID | Password reset requested for non-existent email: srdjan.novic.20@gmail.com | IP: ::1
+2025-08-18 19:53:12 | PASSWORD_RESET_REQUEST | User: 1 | Password reset requested for email: srdjan.novic.20@gmail.com | IP: 127.0.0.1
+2025-08-18 20:01:21 | LOGIN_SUCCESS | User: 1 | User logged in successfully | IP: ::1
+2025-08-18 20:02:03 | USER_STATUS_CHANGED | User: 1 | Admin deactivated user ID: 2 | IP: ::1
+2025-08-18 20:02:05 | USER_STATUS_CHANGED | User: 1 | Admin activated user ID: 2 | IP: ::1
+2025-08-18 20:21:02 | DATA_EXPORT | User: 1 | Admin exported monthly report | IP: ::1
+2025-08-18 20:21:10 | LOGOUT | User: 1 | User logged out | IP: ::1
+2025-08-18 20:21:20 | LOGIN_SUCCESS | User: 1 | User logged in successfully | IP: ::1
+2025-08-18 20:21:53 | LIMIT_SET | User: 1 | Admin set limit for user ID: 2 | IP: ::1
+2025-08-18 20:21:59 | LIMIT_SET | User: 1 | Admin set limit for user ID: 3 | IP: ::1
+2025-08-18 20:22:50 | DATA_EXPORT | User: 1 | Admin exported monthly report | IP: ::1
+2025-08-18 20:34:11 | LOGOUT | User: 1 | User logged out | IP: ::1
+2025-08-18 20:34:24 | LOGIN_SUCCESS | User: 3 | User logged in successfully | IP: ::1
+2025-08-18 20:35:03 | FUEL_RECORD_ADDED | User: 3 | User added fuel record: 1,000.00 RSD | IP: ::1
+2025-08-18 20:36:36 | LOGOUT | User: 3 | User logged out | IP: ::1
+2025-08-18 20:36:54 | LOGIN_SUCCESS | User: 2 | User logged in successfully | IP: ::1
+2025-08-18 20:38:30 | LOGOUT | User: 2 | User logged out | IP: ::1
+2025-08-18 20:38:39 | LOGIN_SUCCESS | User: 3 | User logged in successfully | IP: ::1
+2025-08-18 20:51:02 | LOGOUT | User: 3 | User logged out | IP: ::1
+2025-08-18 20:51:07 | LOGIN_SUCCESS | User: 1 | User logged in successfully | IP: ::1
+2025-08-18 20:51:33 | DATA_EXPORT | User: 1 | Admin exported monthly report | IP: ::1
+2025-08-18 21:01:22 | LOGOUT | User: 1 | User logged out | IP: ::1
