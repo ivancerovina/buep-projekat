@@ -13,12 +13,12 @@ define('APP_URL', 'http://localhost/buep-projekat');
 define('APP_ROOT', dirname(__DIR__));
 
 // Security settings
-define('SESSION_LIFETIME', 1800); // 30 minutes session lifetime
-define('MAX_LOGIN_ATTEMPTS', 3);
-define('LOCKOUT_TIME', 900); // 15 minute in seconds
+define('SESSION_LIFETIME', 1800); // 30 minutes
+define('MAX_LOGIN_ATTEMPTS', 5);
+define('LOCKOUT_TIME', 900); // 1 minute in seconds (for testing)
 define('PASSWORD_RESET_TOKEN_VALIDITY', 3600); // 1 hour
 define('CSRF_TOKEN_NAME', 'csrf_token');
-define('SECURE_COOKIE', true); // Set to true when using HTTPS
+define('SECURE_COOKIE', false); // Set to true when using HTTPS
 define('HTTPONLY_COOKIE', true);
 define('SAMESITE_COOKIE', 'Strict');
 
@@ -60,24 +60,24 @@ if (DEBUG_MODE) {
 function setSecurityHeaders() {
     // Prevent clickjacking
     header('X-Frame-Options: DENY');
-
+    
     // Prevent MIME type sniffing
     header('X-Content-Type-Options: nosniff');
-
+    
     // Enable XSS protection
     header('X-XSS-Protection: 1; mode=block');
-
+    
     // Referrer policy
     header('Referrer-Policy: strict-origin-when-cross-origin');
-
+    
     // Content Security Policy
     header("Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; frame-ancestors 'none';");
-
+    
     // Strict Transport Security (only for HTTPS)
     if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
         header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
     }
-
+    
     // Remove PHP version header
     header_remove('X-Powered-By');
 }

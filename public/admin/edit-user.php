@@ -20,7 +20,7 @@ $user_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if (!$user_id) {
     setAlert('Invalid user ID.', 'error');
-    redirect('/admin/users.php');
+    redirect('/buep-projekat/public/admin/users.php');
 }
 
 // Get user data
@@ -29,13 +29,13 @@ $user = $db->fetchOne($sql, [':id' => $user_id]);
 
 if (!$user) {
     setAlert('User not found.', 'error');
-    redirect('/admin/users.php');
+    redirect('/buep-projekat/public/admin/users.php');
 }
 
 // Prevent editing admin users (except self)
 if ($user['role'] === 'admin' && $user['id'] !== $admin_user['id']) {
     setAlert('Cannot edit other administrator accounts.', 'error');
-    redirect('/admin/users.php');
+    redirect('/buep-projekat/public/admin/users.php');
 }
 
 $errors = [];

@@ -13,15 +13,15 @@ if (Auth::isLoggedIn()) {
     // Redirect based on role
     switch ($_SESSION['role']) {
         case 'admin':
-            redirect('/admin/dashboard.php');
+            redirect('/buep-projekat/public/admin/dashboard.php');
             break;
         case 'manager':
-            redirect('/manager/dashboard.php');
+            redirect('/buep-projekat/public/manager/dashboard.php');
             break;
         default:
-            redirect('/dashboard.php');
+            redirect('/buep-projekat/public/dashboard.php');
     }
 } else {
     // Redirect to login page
-    redirect('/login.php');
+    redirect('/buep-projekat/public/login.php');
 }

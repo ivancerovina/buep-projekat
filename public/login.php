@@ -10,7 +10,7 @@ Auth::startSecureSession();
 
 // Redirect if already logged in
 if (Auth::isLoggedIn()) {
-    redirect('/dashboard.php');
+    redirect('/buep-projekat/public/dashboard.php');
 }
 
 $errors = [];
@@ -45,13 +45,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Redirect based on role
                 switch ($result['role']) {
                     case 'admin':
-                        redirect('/admin/dashboard.php');
+                        redirect('/buep-projekat/public/admin/dashboard.php');
                         break;
                     case 'manager':
-                        redirect('/manager/dashboard.php');
+                        redirect('/buep-projekat/public/manager/dashboard.php');
                         break;
                     default:
-                        redirect('/dashboard.php');
+                        redirect('/buep-projekat/public/dashboard.php');
                 }
             } else {
                 $errors[] = $result['message'];

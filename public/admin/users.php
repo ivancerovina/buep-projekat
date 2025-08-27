@@ -25,10 +25,9 @@ if (isset($_GET['toggle']) && isset($_GET['token'])) {
         $target_user = $db->fetchOne($sql, [':id' => $user_id]);
         
         if ($target_user) {
-            $new_status = $target_user['is_active'] ? 0 : 1;
+            $new_status = !$target_user['is_active'];
             $sql = "UPDATE users SET is_active = :status WHERE id = :id";
             $db->execute($sql, [':status' => $new_status, ':id' => $user_id]);
-
             
             $action = $new_status ? 'activated' : 'deactivated';
             Security::logSecurityEvent('USER_STATUS_CHANGED', "Admin $action user ID: $user_id", $user['id']);
@@ -37,7 +36,7 @@ if (isset($_GET['toggle']) && isset($_GET['token'])) {
     } else {
         setAlert('Invalid security token.', 'error');
     }
-    redirect('/admin/users.php');
+    redirect('/buep-projekat/public/admin/users.php');
 }
 
 // Handle user deletion
@@ -61,7 +60,7 @@ if (isset($_GET['delete']) && isset($_GET['token'])) {
     } else {
         setAlert('Invalid security token.', 'error');
     }
-    redirect('/admin/users.php');
+    redirect('/buep-projekat/public/admin/users.php');
 }
 
 // Pagination and search

@@ -283,7 +283,7 @@ class Auth {
     // Require login - redirect if not logged in
     public static function requireLogin() {
         if (!self::isLoggedIn()) {
-            header('Location: /login.php');
+            header('Location: /buep-projekat/public/login.php');
             exit();
         }
     }
