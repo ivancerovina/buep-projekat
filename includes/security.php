@@ -163,14 +163,14 @@ class Security {
             
             $db->execute($sql, $params);
             
-            // Also write to file log
-            $log_message = date('Y-m-d H:i:s') . " | " . $event_type . " | " . 
-                          ($user_id ? "User: $user_id | " : "") . 
-                          $description . " | IP: " . self::getClientIP() . PHP_EOL;
-            
-            $log_file = LOG_PATH . 'security_' . date('Y-m-d') . '.log';
-            file_put_contents($log_file, $log_message, FILE_APPEND | LOCK_EX);
-            chmod($log_file, LOG_FILE_PERMISSION);
+//             // Also write to file log
+//             $log_message = date('Y-m-d H:i:s') . " | " . $event_type . " | " .
+//                           ($user_id ? "User: $user_id | " : "") .
+//                           $description . " | IP: " . self::getClientIP() . PHP_EOL;
+//
+//             $log_file = LOG_PATH . 'security_' . date('Y-m-d') . '.log';
+//             file_put_contents($log_file, $log_message, FILE_APPEND | LOCK_EX);
+//             chmod($log_file, LOG_FILE_PERMISSION);
             
         } catch (Exception $e) {
             error_log("Failed to log security event: " . $e->getMessage());
