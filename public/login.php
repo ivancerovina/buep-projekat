@@ -21,6 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Verify CSRF token
     if (!isset($_POST[CSRF_TOKEN_NAME]) || !Security::verifyCSRFToken($_POST[CSRF_TOKEN_NAME])) {
         $errors[] = "Invalid security token. Please refresh and try again.";
+        // Clear the session CSRF token to force regeneration
+        unset($_SESSION[CSRF_TOKEN_NAME]);
     } else {
         // Get input - don't sanitize username/password as it may alter the actual credentials
         $username = trim($_POST['username'] ?? '');

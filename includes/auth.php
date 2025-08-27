@@ -26,12 +26,18 @@ class Auth {
             // Start session
             session_start();
             
-            // Regenerate session ID periodically
+            // Regenerate session ID periodically (preserve CSRF token)
             if (!isset($_SESSION['last_regeneration'])) {
                 $_SESSION['last_regeneration'] = time();
             } elseif (time() - $_SESSION['last_regeneration'] > 300) { // 5 minutes
+                // Preserve CSRF token during regeneration
+                $csrf_token = $_SESSION[CSRF_TOKEN_NAME] ?? null;
                 session_regenerate_id(true);
                 $_SESSION['last_regeneration'] = time();
+                // Restore CSRF token
+                if ($csrf_token) {
+                    $_SESSION[CSRF_TOKEN_NAME] = $csrf_token;
+                }
             }
         }
     }
@@ -135,9 +141,15 @@ class Auth {
             session_start();
         }
         
-        // Only regenerate session ID if headers haven't been sent
+        // Only regenerate session ID if headers haven't been sent (preserve CSRF token)
         if (!headers_sent()) {
+            // Preserve CSRF token during regeneration
+            $csrf_token = $_SESSION[CSRF_TOKEN_NAME] ?? null;
             session_regenerate_id(true);
+            // Restore CSRF token
+            if ($csrf_token) {
+                $_SESSION[CSRF_TOKEN_NAME] = $csrf_token;
+            }
         }
         
         // Store user data in session
