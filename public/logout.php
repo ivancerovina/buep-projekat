@@ -12,4 +12,4 @@ Auth::logout();
 setAlert('You have been successfully logged out.', 'success');
 
 // Redirect to login page
-redirect('/buep-projekat/public/login.php');
+redirect('/login.php');

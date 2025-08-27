@@ -20,7 +20,7 @@ $record_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 if (!$record_id) {
     setAlert('Invalid record ID.', 'error');
-    redirect('/buep-projekat/public/fuel-records.php');
+    redirect('/fuel-records.php');
 }
 
 // Get record data and verify ownership
@@ -29,7 +29,7 @@ $record = $db->fetchOne($sql, [':id' => $record_id, ':user_id' => $user['id']]);
 
 if (!$record) {
     setAlert('Record not found or access denied.', 'error');
-    redirect('/buep-projekat/public/fuel-records.php');
+    redirect('/fuel-records.php');
 }
 
 $errors = [];

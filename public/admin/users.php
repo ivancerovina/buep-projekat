@@ -36,7 +36,7 @@ if (isset($_GET['toggle']) && isset($_GET['token'])) {
     } else {
         setAlert('Invalid security token.', 'error');
     }
-    redirect('/buep-projekat/public/admin/users.php');
+    redirect('/admin/users.php');
 }
 
 // Handle user deletion
@@ -60,7 +60,7 @@ if (isset($_GET['delete']) && isset($_GET['token'])) {
     } else {
         setAlert('Invalid security token.', 'error');
     }
-    redirect('/buep-projekat/public/admin/users.php');
+    redirect('/admin/users.php');
 }
 
 // Pagination and search
